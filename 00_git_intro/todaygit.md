@@ -410,15 +410,31 @@ $ touch 02_git_branch/merge-test.txt
 ```
 
 
+- git에 있는 특수한 포인터
+- 가장 최신의 경로?
 
-<<<<<<< HEAD
-**HEAD**
+
+
+![image-20191210160649993](C:\Users\student\AppData\Roaming\Typora\typora-user-images\image-20191210160649993.png)
+
+![image-20191210160658080](C:\Users\student\AppData\Roaming\Typora\typora-user-images\image-20191210160658080.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - git에 있는 특수한 포인터
 - 가장 최신의 경로?
-=======
-
->>>>>>> feature/test
 
 
 
