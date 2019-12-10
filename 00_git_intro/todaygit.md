@@ -411,10 +411,14 @@ $ touch 02_git_branch/merge-test.txt
 
 
 
+<<<<<<< HEAD
 **HEAD**
 
 - git에 있는 특수한 포인터
 - 가장 최신의 경로?
+=======
+
+>>>>>>> feature/test
 
 
 
