@@ -233,7 +233,9 @@ $ touch README.md
 
 
 
-merge conflci
+merge conflict
+
+Auto merge
 
 
 
@@ -241,10 +243,16 @@ merge conflci
 
 - 빔창이 나온 경우:
   - `ESC` 5번
-  - i
-  - ;
-  - w
-  - q
+  - :wq
+  - i( 수정할 때 사용함.)
+
+
+
+숨긴 폴더 보기
+
+```
+ls -a
+```
 
 
 
@@ -252,7 +260,61 @@ merge conflci
 
 
 
+```bash
+# add 완전 전 상태로 
+# 더이상 git이 관리하지 않겠다는 의미. 
+$ git rm --cached 01_git_reset/reset2.txt
 
+
+
+# reset을 사용하면 원래 상태로 돌릴 수 있음.
+$ git reset HEAD 01_git_reset/reset.txt
+
+
+
+```
+
+
+
+![image-20191210152133986](C:\Users\student\AppData\Roaming\Typora\typora-user-images\image-20191210152133986.png)
+
+
+
+```bash
+.gitignore에 
+
+reset2.txt를 추가하는 경우엔 git이 더이상 관리하지 않게 됨.
+```
+
+
+
+![image-20191210152328284](C:\Users\student\AppData\Roaming\Typora\typora-user-images\image-20191210152328284.png)
+
+
+
+
+
+```bash
+$ git add 01_git_reset/reset.txt
+$ git commit -m "added reset.txt files"
+
+```
+
+
+
+
+
+![image-20191210152417239](C:\Users\student\AppData\Roaming\Typora\typora-user-images\image-20191210152417239.png)
+
+
+
+
+
+
+
+```bash
+$ git commit --amend
+```
 
 
 
