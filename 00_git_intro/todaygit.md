@@ -1,3 +1,5 @@
+로컬과 리모트로 나뉜다. 
+
 ### 1.1 
 
 ```bash
@@ -120,6 +122,14 @@ $ touch .gitignore
 ```
 
 > git이 직접 관리하지 않았으면 하는 파일이나 폴더를 만들곳 싶을때 `.`을 사용한다. 
+>
+> .gitignore 깃이 관리하는 것을 무시하게 만든다. 
+>
+> 어떤파일들이 있을까?
+
+- .vscode 처럼 세팅과 관련된 파일들은 git으로 관리하는 것이 의미가 없음. 
+- 키값과 같은 데이터는 gitignore에 넣어줘야함. 
+  - github에서 이러한 키값을 찾아서 탈취하는 사람들이 있음. 
 
 
 
@@ -132,6 +142,121 @@ $ touch .gitignore
 > 깃이 관리하지 않았으면 하는 파일이나 폴더. 
 >
 > 보통 git init을 한 후 바로 만든다. 
+>
+> http://gitignore.io/
+
+
+
+
+
+```bash
+student@M1305 MINGW64 ~/TIL (master)
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        00_git_intro/todaygit.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git add .
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)  
+        new file:   .gitignore
+        new file:   00_git_intro/todaygit.md
+
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git commit -m "added .gitignore file"
+[master 7044b09] added .gitignore file
+ 2 files changed, 249 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 00_git_intro/todaygit.md
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git log --oneline
+7044b09 (HEAD -> master) added .gitignore file
+933b778 added Git.md file
+65579e4 (origin/master) second commit
+02946c0 first commit
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git push origin master
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (9/9), 2.51 KiB | 1.26 MiB/s, done.
+Total 9 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/JHM9191/TIL.git
+   65579e4..7044b09  master -> master
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git log --oneline
+7044b09 (HEAD -> master, origin/master) added .gitignore file
+933b778 added Git.md file
+65579e4 second commit
+02946c0 first commit
+```
+
+
+
+
+
+
+
+### 1.4 README.md
+
+>repository를 소개하는 파일.
+>
+>directory에 왔을 때 제일 먼저 보는 파일.
+
+
+
+```bash
+student@M1305 MINGW64 ~/TIL (master)
+$ touch README.md
+```
+
+
+
+
+
+
+
+
+
+merge conflci
+
+
+
+
+
+- 빔창이 나온 경우:
+  - `ESC` 5번
+  - i
+  - ;
+  - w
+  - q
+
+
+
+### 1.5 reset
+
+
+
+
+
+
+
+
 
 
 
