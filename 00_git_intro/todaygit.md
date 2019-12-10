@@ -320,6 +320,99 @@ $ git commit --amend
 
 
 
+### commit할 때 같이 commit해야할 파일을 빠트린 경우
+
+
+
+```bash
+$ git commit --amend
+```
+
+
+
+
+
+### Git Flow
+
+> master 가 메인임. 
+
+
+
+- 마스터가 메임
+  - 배포된 프로그램들은 모두 마스터임. 
+- develop branch
+  - feature branch
+- halffix
+  - 취합한 후 버그가 있어서 수정을 해야할 경우 사용해야함. 
+
+
+
+
+
+
+
+### Making Branches
+
+
+
+```bash
+$ git branch feature/test
+
+$ git branch
+  feature/test
+* master
+
+# branch로 이동
+$ git checkout feature/test 
+
+# 결과
+Switched to branch 'feature/test'
+M       00_git_intro/todaygit.md
+
+# master로 다시 나오기
+$ git checkout master 
+
+# branch 삭제 (merging이 이루어진 branch를 삭제할 때 사용됨.)
+$ git branch --d feature/test 
+
+# 결과
+Deleted branch feature/test (was 35557ad).
+
+#
+$ git branch
+* master
+
+# branch 생성과 동시에 이동.
+$ git checkout -b feacher/test
+
+# branch를 강제로 삭제. (merging을 하지 않은 상태에서 삭제할 때 사용됨.)
+$ git branch -D feacher/test 
+
+
+
+
+```
+
+
+
+
+
+```bash
+student@M1305 MINGW64 ~/TIL (master)
+$ git checkout -b feature/test
+Switched to a new branch 'feature/test'
+
+student@M1305 MINGW64 ~/TIL (feature/test)
+$ touch 02_git_branch/merge-test.txt
+
+
+
+```
+
+
+
+
+
 
 
 
