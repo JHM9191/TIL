@@ -258,16 +258,15 @@ ls -a
 
 ### 1.5 reset
 
-
-
 ```bash
 # add 완전 전 상태로 
-# 더이상 git이 관리하지 않겠다는 의미. 
+# .gitignore에 등록을 하고 더이상 git이 관리하지 않겠다는 의미.
 $ git rm --cached 01_git_reset/reset2.txt
 
 
 
 # reset을 사용하면 원래 상태로 돌릴 수 있음.
+# commit 내역에서 밖으로 빠져나가는 상태로 만듬.
 $ git reset HEAD 01_git_reset/reset.txt
 
 
@@ -431,12 +430,22 @@ $ touch 02_git_branch/merge-test.txt
 
 
 
-
+### HEAD
 
 - git에 있는 특수한 포인터
 - 가장 최근에 위치하고 있는  위치. 
 
 
+
+### 3가지 상황
+
+1. fast forward
+2. merge commit
+3. merge conflict
+
+
+
+#### 1. Fast Forward
 
 ```bash
 
@@ -1663,4 +1672,389 @@ student@M1305 MINGW64 ~/TIL (master|MERGING)
 $
 
 ```
+
+
+
+
+
+
+
+```bash
+
+student@M1305 MINGW64 ~/TIL (master|MERGING)
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+        modified:   00_git_intro/todaygit.md
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   02_git_branch/merge-test.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+
+student@M1305 MINGW64 ~/TIL (master|MERGING)
+$ git add .
+
+student@M1305 MINGW64 ~/TIL (master|MERGING)
+$ git commit -m "Hello world in java -> python"
+[master 6ff32c6] Hello world in java -> python
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git log --oneline
+6ff32c6 (HEAD -> master) Hello world in java -> python
+49d6cd3 updated merge-test.txt file python -> java
+100298b (feature/board) updated merge-test.txt file
+adb7154 (origin/master) Merge branch 'feature/signup'
+4716c64 updated merge-test.txt file
+2d928ad Complete signup.html
+7b7e648 completed merge
+67d2a3f Complete test.html
+ace5fe1 Merge branch 'feature/test'
+41f9e38 commit
+97970bd added merge-test.txt
+35557ad updated .gitignore
+ede9fb5 added reset.txt and omit_file.txt files
+c8a4402 Added reset.txt and reset2.txt
+7044b09 added .gitignore file
+933b778 added Git.md file
+65579e4 second commit
+02946c0 first commit
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git log --oneline --graph
+*   6ff32c6 (HEAD -> master) Hello world in java -> python
+|\
+| * 100298b (feature/board) updated merge-test.txt file
+* | 49d6cd3 updated merge-test.txt file python -> java
+|/
+*   adb7154 (origin/master) Merge branch 'feature/signup'
+|\
+| * 2d928ad Complete signup.html
+* | 4716c64 updated merge-test.txt file
+|/
+*   7b7e648 completed merge
+|\
+| * 67d2a3f Complete test.html
+* |   ace5fe1 Merge branch 'feature/test'
+|\ \
+| |/
+| * 97970bd added merge-test.txt
+* | 41f9e38 commit
+|/
+* 35557ad updated .gitignore
+* ede9fb5 added reset.txt and omit_file.txt files
+* c8a4402 Added reset.txt and reset2.txt
+* 7044b09 added .gitignore file
+* 933b778 added Git.md file
+* 65579e4 second commit
+* 02946c0 first commit
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git branch --d feature/board 
+Deleted branch feature/board (was 100298b).
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git log --oneline --graph
+*   6ff32c6 (HEAD -> master) Hello world in java -> python
+|\
+| * 100298b updated merge-test.txt file
+* | 49d6cd3 updated merge-test.txt file python -> java
+|/
+*   adb7154 (origin/master) Merge branch 'feature/signup'
+|\
+| * 2d928ad Complete signup.html
+* | 4716c64 updated merge-test.txt file
+|/
+*   7b7e648 completed merge
+|\
+| * 67d2a3f Complete test.html
+* |   ace5fe1 Merge branch 'feature/test'
+|\ \  
+| |/
+| * 97970bd added merge-test.txt
+* | 41f9e38 commit
+|/
+* 35557ad updated .gitignore
+* ede9fb5 added reset.txt and omit_file.txt files
+* c8a4402 Added reset.txt and reset2.txt
+* 7044b09 added .gitignore file
+* 933b778 added Git.md file
+* 65579e4 second commit
+* 02946c0 first commit
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git push origin master
+Enumerating objects: 21, done.
+Counting objects: 100% (21/21), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (16/16), 7.25 KiB | 1.81 MiB/s, done.
+Total 16 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas: 100% (7/7), completed with 2 local objects.
+To https://github.com/JHM9191/TIL.git
+   adb7154..6ff32c6  master -> master
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git log --oneline --graph
+*   6ff32c6 (HEAD -> master, origin/master) Hello world in java -> python
+|\
+| * 100298b updated merge-test.txt file
+* | 49d6cd3 updated merge-test.txt file python -> java
+|/
+*   adb7154 Merge branch 'feature/signup'
+|\
+| * 2d928ad Complete signup.html
+* | 4716c64 updated merge-test.txt file
+|/
+*   7b7e648 completed merge
+|\
+| * 67d2a3f Complete test.html
+* |   ace5fe1 Merge branch 'feature/test'
+|\ \
+| |/
+| * 97970bd added merge-test.txt
+* | 41f9e38 commit
+|/
+* 35557ad updated .gitignore
+* ede9fb5 added reset.txt and omit_file.txt files
+* c8a4402 Added reset.txt and reset2.txt
+* 7044b09 added .gitignore file
+* 933b778 added Git.md file
+* 65579e4 second commit
+* 02946c0 first commit
+
+student@M1305 MINGW64 ~/TIL (master)
+$
+
+```
+
+
+
+
+
+
+
+
+
+### stash
+
+> commit 을 할 단계는 아닌데 
+>
+> 임시적으로 저장만 할 수 있는 임시저장소와 같은 계념임.
+
+- add 하고 commit 전에 애매한 상황에서 저장하는 것임.
+- branch 계념이 아님. 
+- git이 잠깐 보관해주는 것임. 
+- 또한 pull 하기 전에 작업을 하면 pull이 불가능해지는데 이때 작업한 것을 stash하고난 다음 pull하고난 뒤 stash에 있는 작업을 가져올 수 있음. 이런 경우에도 stash를 사용함. 
+
+```ㅠㅁ노
+
+
+student@M1305 MINGW64 ~/TIL (master)
+$ mkdir 03_git_stash
+
+student@M1305 MINGW64 ~/TIL (master)
+$ cd 03_git_stash/
+
+student@M1305 MINGW64 ~/TIL/03_git_stash (master)
+$ cd ..
+
+student@M1305 MINGW64 ~/TIL (master)
+$ touch 03_git_stash/stash-test.txt
+
+student@M1305 MINGW64 ~/TIL (master)
+$ ls
+00_git_intro  01_git_reset  02_git_branch  03_git_stash  README.md
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed) 
+        03_git_stash/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+student@M1305 MINGW64 ~/TIL (master)
+$
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git add 03_git_stash/stash-test.txt 
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   03_git_stash/stash-test.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash
+Saved working directory and index state WIP on master: 6ff32c6 Hello world in java -> python
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash list
+stash@{0}: WIP on master: 6ff32c6 Hello world in java -> python
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash apply
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   03_git_stash/stash-test.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   03_git_stash/stash-test.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+
+student@M1305 MINGW64 ~/TIL (master)
+$ gti stash list
+bash: gti: command not found
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash list
+stash@{0}: WIP on master: 6ff32c6 Hello world in java -> python
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash drop
+Dropped refs/stash@{0} (262ed4e40c338caa23d0e080997db17b1a88fc52)
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash list
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   03_git_stash/stash-test.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash
+Saved working directory and index state WIP on master: 6ff32c6 Hello world in java -> python
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash list
+stash@{0}: WIP on master: 6ff32c6 Hello world in java -> python
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash pop
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   03_git_stash/stash-test.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   00_git_intro/todaygit.md
+
+Dropped refs/stash@{0} (eb21e765fc820c086caa0185b6d24b04a53912ba)
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git stash list
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git commit -m "added stash-test.txt file"
+[master 223b9e9] added stash-test.txt file
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 03_git_stash/stash-test.txt
+
+student@M1305 MINGW64 ~/TIL (master)
+$ git push origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 328 bytes | 328.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/JHM9191/TIL.git
+   6ff32c6..223b9e9  master -> master
+
+student@M1305 MINGW64 ~/TIL (master)
+$
+
+```
+
+
+
+
+
+### 2019/12/11
+
+
+
+## reset & revert
+
+> 히스토리 작업으로 돌아갈 수 있음
+>
+> 원하는 위치로 돌아갈 수 있지만 
+>
+> 돌아간 위치 이후의 작업은 다 지워짐. 
+
+#### Reset
+
+- 돌아가고 커밋은 안생김.
+
+
+
+#### 2. revert
+
+- 돌아갔다는 커밋이 생김.
+
+
+
+
+
+> 이미 push(github에 올린)한 작업은 수정할 수 없음.
+>
+> reset 혹은 revert할 수 없음. 
+
+
+
+
+
+
 
