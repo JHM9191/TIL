@@ -2073,6 +2073,8 @@ $ git reset --hard 713845d1dbea4a8d0f6620f9a61bdb038005a8fd
 > working directory에 영향을 줌. 
 >
 > 파일 혹은 추가 라인이 아예 없어져 버림.
+>
+> 변경사항을 다 날림. 
 
 
 
@@ -2097,4 +2099,36 @@ $ git reset --mixed ef3e1a7ec62fcf24672c388a42d9e42fe814e784
 >add 전 상태로 되돌림.
 >
 >reset을 사용할 때 옵션을 넣어주지 않으면  --mixed가  default 임. 
+
+
+
+### HEAD 를 기준으로 돌아가기.
+
+
+
+````bash
+$ git reset HEAD~2
+````
+
+> head를 기준으로 2단계 전 커밋으로 되돌아가기. 
+>
+> unstaged 상태로 됨. 
+
+
+
+
+
+
+
+### Revert
+
+>돌아는 가는데 돌아갔다는 커밋이 남음.
+
+
+
+
+
+
+
+
 
