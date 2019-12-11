@@ -2026,7 +2026,7 @@ $
 
 
 
-## reset & revert
+## Reset & Revert
 
 > 히스토리 작업으로 돌아갈 수 있음
 >
@@ -2034,19 +2034,15 @@ $
 >
 > 돌아간 위치 이후의 작업은 다 지워짐. 
 
-#### Reset
+#### 1. Reset
 
 - 돌아가고 커밋은 안생김.
 
 
 
-#### 2. revert
+#### 2. Revert
 
 - 돌아갔다는 커밋이 생김.
-
-
-
-
 
 > 이미 push(github에 올린)한 작업은 수정할 수 없음.
 >
@@ -2056,5 +2052,49 @@ $
 
 
 
+reset의 3가지 옵션
 
+1. hard
+2. soft
+3. mixed
+
+
+
+![image-20191211094331360](C:\Users\student\AppData\Roaming\Typora\typora-user-images\image-20191211094331360.png)
+
+
+
+#### 1. Hard Reset
+
+```bash
+$ git reset --hard 713845d1dbea4a8d0f6620f9a61bdb038005a8fd
+```
+
+> working directory에 영향을 줌. 
+>
+> 파일 혹은 추가 라인이 아예 없어져 버림.
+
+
+
+#### 2. Soft Reset
+
+```bash
+$ git reset --soft 85009be0dc43766874dce3b5ee863ad635d21e01
+```
+
+> staging area까지만 감.
+>
+> commit이 된 작업을 staging area에 되돌린다라는 의미임. 
+
+
+
+#### 3. Mixed Reset
+
+```bash
+$ git reset --mixed ef3e1a7ec62fcf24672c388a42d9e42fe814e784
+```
+
+>add 전 상태로 되돌림.
+>
+>reset을 사용할 때 옵션을 넣어주지 않으면  --mixed가  default 임. 
 
