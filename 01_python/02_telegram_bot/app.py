@@ -72,6 +72,25 @@ def papago():
         elif text[0:4] == '/영한 ':
             source = 'en'
             target = 'ko'   
+        elif text[0:4] == '/영불 ':
+            source = 'en'
+            target = 'fr'
+        elif text[0:4] == '/한불 ':
+            source = 'ko'
+            target = 'fr'
+        elif text[0:4] == '/로또 ':
+            num = text[4:]
+            res = requests.get(f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={num}')
+            lotto = res.json()
+
+            winner = []
+            for i in range(1,7):
+                winner.append(lotto[f'drwtNo{i}'])
+            bonus_num = lotto['bnusNo']
+            text = f'{num}회차 로또 당첨번호는 {winner}입니다. 보너스넘버는 {bonus_num}입니다.'
+            requests.get(f'{base}/bot{token}/sendMessage?chat_id={chat_id}&text={text}')
+            return '', 200
+        
         headers = {'X-Naver-Client-Id': naver_client_id,
                    'X-Naver-Client-Secret': naver_client_secret
                   }
