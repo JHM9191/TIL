@@ -111,9 +111,13 @@ def vonvon():
 @app.route('/godmademe')
 def godmademe():
     name = request.args.get('name')
-    first_list = ['잘생김', '못생김', '어중간']
-    
-    return render_template('godmademe.html', name = name, first_list = first_list)
+    first_list = ['잘생김','못생김','어중간']
+    second_list = ['자신감','쑥스러움','애교','잘난척']
+    third_list = ['허세','돈복','식욕','물욕','성욕']
+    first = random.choice(first_list)
+    second = random.choice(second_list)
+    third = random.choice(third_list)
+    return render_template('godmademe.html', name = name, first = first, second = second, third = third)
 
 
 # 서버를 다시 시작하지 않아도 수정된 사항이 반영될 수 있도록. 
